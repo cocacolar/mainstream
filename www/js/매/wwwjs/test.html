@@ -1,0 +1,181 @@
+<script src='d3.min.js'></script>
+<script src='nv.d3.min.js'></script>
+<link href="nv.d3.css" rel="stylesheet" type="text/css">
+<script>
+(function(){
+d3.json('cumulativeLineData.json', function(data) {
+  nv.addGraph(function() {
+    var chart = nv.models.lineChart()
+				  .margin({left: 100})
+                  .x(function(d,i) { return d[0] })
+                  .y(function(d) { return d[1] }) //adjusting, 100% is 1.00, not 100 as it is in the data
+                  .color(d3.scale.category10().range())
+                  .useInteractiveGuideline(true)
+                  ;
+
+     chart.xAxis
+		.tickValues([13.50,13.75,14.00,14.25,14.50,14.75,15.00,15.25])
+		.tickFormat(function(d) {
+			var yearData = (d+"").split(".")[0];
+			var numberData = (d+"").split(".")[1];
+			
+			try{
+				if(numberData.length == 2){
+					numberData = numberData*1;
+				}else{
+					numberData = numberData*1 * 10;			
+				}
+			}catch(e){
+			
+			}
+			
+			
+			if(numberData == undefined ||numberData < 25){
+				return "'"+yearData+" 1Q";
+			}else if(numberData < 50){
+				return "'"+yearData+" 2Q";
+			}else if(numberData < 75){
+				return "'"+yearData+" 3Q";
+			
+			}else{
+				console.log(numberData);
+				return "'"+yearData+" 4Q";
+			}
+      });
+		  
+     chart.yAxis
+        .tickFormat(function(d) {
+            return d3.format(',f')(d)
+          });
+
+//    chart.yAxis
+//        .tickFormat(d3.format(',.1%'));
+
+    d3.select('#chart svg')
+        .datum(data)
+        .call(chart);
+
+    //TODO: Figure out a good way to do this automatically
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+  
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart()
+				  .margin({left: 100})
+                  .x(function(d,i) { return d[0] })
+                  .y(function(d) { return d[1] }) //adjusting, 100% is 1.00, not 100 as it is in the data
+				  ;
+
+
+     chart.xAxis
+		.tickValues([13.50,13.75,14.00,14.25,14.50,14.75,15.00,15.25])
+		.tickFormat(function(d) {
+			var yearData = (d+"").split(".")[0];
+			var numberData = (d+"").split(".")[1];
+			
+			try{
+				if(numberData.length == 2){
+					numberData = numberData*1;
+				}else{
+					numberData = numberData*1 * 10;			
+				}
+			}catch(e){
+			
+			}
+			
+			
+			if(numberData == undefined ||numberData < 25){
+				return "'"+yearData+" 1Q";
+			}else if(numberData < 50){
+				return "'"+yearData+" 2Q";
+			}else if(numberData < 75){
+				return "'"+yearData+" 3Q";
+			
+			}else{
+				console.log(numberData);
+				return "'"+yearData+" 4Q";
+			}
+      });
+		  
+     chart.yAxis
+        .tickFormat(function(d) {
+            return d3.format(',f')(d)
+          });
+    d3.select('#chart2 svg')
+        .datum(data)
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  
+    nv.addGraph(function() {
+      var chart = nv.models.stackedAreaChart()
+				  .margin({left: 100})
+                  .x(function(d,i) { return d[0] })
+                  .y(function(d) { return d[1] }) //adjusting, 100% is 1.00, not 100 as it is in the data
+				  ;
+
+     chart.xAxis
+		.tickValues([13.50,13.75,14.00,14.25,14.50,14.75,15.00,15.25])
+		.tickFormat(function(d) {
+			var yearData = (d+"").split(".")[0];
+			var numberData = (d+"").split(".")[1];
+			
+			try{
+				if(numberData.length == 2){
+					numberData = numberData*1;
+				}else{
+					numberData = numberData*1 * 10;			
+				}
+			}catch(e){
+			
+			}
+			
+			
+			if(numberData == undefined ||numberData < 25){
+				return "'"+yearData+" 1Q";
+			}else if(numberData < 50){
+				return "'"+yearData+" 2Q";
+			}else if(numberData < 75){
+				return "'"+yearData+" 3Q";
+			
+			}else{
+				console.log(numberData);
+				return "'"+yearData+" 4Q";
+			}
+      });
+		  
+     chart.yAxis
+        .tickFormat(function(d) {
+            return d3.format(',f')(d)
+          });
+
+      d3.select("#chart3 svg")
+        .datum(data)
+          .transition().duration(500).call(chart);
+
+      nv.utils.windowResize(chart.update);
+
+      return chart;
+  });
+  
+  
+});
+})();
+</script>
+<div id='chart' style='width:500px;height:300px;'>
+<svg></svg>
+</div>
+
+<div id='chart2' style='width:500px;height:300px;'>
+<svg></svg>
+</div>
+
+<div id='chart3' style='width:500px;height:300px;'>
+<svg></svg>
+</div>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <style>
+      .angular-google-map-container {
+          width: 100%;
+          height: 504px;
+      }
+    </style>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+
+    <script>
+// Ionic Starter App
+
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+// 'starter.services' is found in services.js
+// 'starter.controllers' is found in controllers.js
+angular.module('app', ['ionic'])
+
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+})
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+
+    .state('page8', {
+      url: '/tabs',
+      templateUrl: 'page8.html'
+    })
+    ;
+
+  // if none of the above states are matched, use this as the fallback
+
+  $urlRouterProvider.otherwise('/tabs');
+
+
+});
+
+
+    </script>
+  </head>
+  <body ng-app="app" animation="slide-left-right-ios7">
+  <div>
+    <div>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-back-button class="button-icon icon ion-ios7-arrow-back">Back</ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view></ion-nav-view>
+    </div>
+</div>
+<script id="page8.html" type="text/ng-template">
+<ion-view title="">
+    <ion-tabs class="tabs-stable tabs-icon-top">
+        <ion-tab title="홈" icon="ion-ios7-contact-outline">
+            <ion-content padding="true" class="has-header">
+                <div style="line-height: 30px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; width: 50%; height: 70px; background-color: rgb(255, 255, 255);">
+                    <i class="icon ion-image" style="font-size: 20px;color: rgb(136, 136, 136); vertical-align: middle;"></i>
+                </div>
+                <div>
+                    <p>2015년 3분기 (09월 05일 현재)</p>
+                </div>
+                <div>
+                    <h1>123,456,789 원</h1>
+                </div>
+                <div class="list card">
+                    <div class="item item-divider">Card</div>
+                    <div class="item item-body"></div>
+                </div>
+            </ion-content>
+        </ion-tab>
+        <ion-tab title="관리등록" icon="ion-ios7-camera">
+            <ion-content padding="true" class="has-header"></ion-content>
+        </ion-tab>
+        <ion-tab title="사용허락" icon="ion-ios7-camera">
+            <ion-content padding="true" class="has-header"></ion-content>
+        </ion-tab>
+        <ion-tab title="정산분배" icon="ion-ios7-camera">
+            <ion-content padding="true" class="has-header"></ion-content>
+        </ion-tab>
+        <ion-tab title="경영관리" icon="ion-ios7-camera">
+            <ion-content padding="true" class="has-header"></ion-content>
+        </ion-tab>
+    </ion-tabs>
+</ion-view></script>
+  </body>
+</html>
